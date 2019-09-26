@@ -1,19 +1,17 @@
-import { routerMiddleware } from 'connected-react-router';
-import { createBrowserHistory } from 'history';
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore } from 'redux-persist';
-import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import createRootReducer from './root-reducer';
+import rootReducer from './root-reducer';
 
-export const history = createBrowserHistory();
+const middlewares = [];
 
-const middlewares = [logger, thunk, routerMiddleware(history)];
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(logger);
+}
 
-export const store = createStore(
-  createRootReducer(history),
-  applyMiddleware(...middlewares)
-);
+export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 export const persistor = persistStore(store);
+
+export default { store, persistStore };
