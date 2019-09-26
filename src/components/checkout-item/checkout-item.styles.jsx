@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CheckoutItemContainer = styled.div`
   width: 100%;
   display: flex;
-  min-height: 100px;
+  height: 180px;
   border-bottom: 1px solid darkgrey;
   padding: 15px 0;
   font-size: 20px;
@@ -12,11 +12,10 @@ export const CheckoutItemContainer = styled.div`
 
 export const ImageContainer = styled.div`
   width: 23%;
-  padding-right: 15px;
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 120px;
+    height: 150px;
   }
 `;
 
@@ -36,7 +35,7 @@ export const QuantityContainer = styled(TextContainer)`
   }
 `;
 
-export const RemoveButtonContainer = styled.div`
+export const RemoveItemContainer = styled.div`
   padding-left: 12px;
   cursor: pointer;
 `;

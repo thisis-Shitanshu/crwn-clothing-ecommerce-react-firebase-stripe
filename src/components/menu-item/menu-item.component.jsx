@@ -1,5 +1,6 @@
+import { push } from 'connected-react-router';
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import {
   MenuItemContainer,
@@ -9,20 +10,26 @@ import {
   ContentSubtitle
 } from './menu-item.styles';
 
-const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
-  <MenuItemContainer
-    size={size}
-    onClick={() => history.push(`${match.url}${linkUrl}`)}
-  >
+const MenuItem = ({ title, imageUrl, small, linkTo, push }) => (
+  <MenuItemContainer small={small} onClick={() => push(linkTo)}>
     <BackgroundImageContainer
-      className='background-image'
-      imageUrl={imageUrl}
+      className='background-image-container'
+      style={{
+        backgroundImage: `url(${imageUrl})`
+      }}
     />
     <ContentContainer className='content'>
-      <ContentTitle>{title.toUpperCase()}</ContentTitle>
-      <ContentSubtitle>SHOP NOW</ContentSubtitle>
+      <ContentTitle className='title'>{title.toUpperCase()}</ContentTitle>
+      <ContentSubtitle className='subtitle'>SHOP NOW</ContentSubtitle>
     </ContentContainer>
   </MenuItemContainer>
 );
 
-export default withRouter(MenuItem);
+const mapDispatchToProps = dispatch => ({
+  push: route => dispatch(push(route))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(MenuItem);

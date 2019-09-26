@@ -8,16 +8,13 @@ import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 import { SignUpContainer, SignUpTitle } from './sign-up.styles';
 
 class SignUp extends React.Component {
-  constructor() {
-    super();
+  state = { displayName: '', email: '', password: '', confirmPassword: '' };
 
-    this.state = {
-      displayName: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    };
-  }
+  handleChange = event => {
+    const { name, value } = event.target;
+
+    this.setState({ [name]: value });
+  };
 
   handleSubmit = async event => {
     event.preventDefault();
@@ -35,31 +32,26 @@ class SignUp extends React.Component {
         password
       );
 
-      await createUserProfileDocument(user, { displayName });
-
-      this.setState({
-        displayName: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-      });
+      createUserProfileDocument(user, { displayName });
     } catch (error) {
       console.error(error);
     }
-  };
 
-  handleChange = event => {
-    const { name, value } = event.target;
-
-    this.setState({ [name]: value });
+    this.setState({
+      displayName: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    });
   };
 
   render() {
     const { displayName, email, password, confirmPassword } = this.state;
+
     return (
       <SignUpContainer>
-        <SignUpTitle>I do not have a account</SignUpTitle>
-        <span>Sign up with your email and password</span>
+        <SignUpTitle>I already have an account</SignUpTitle>
+        <span>Sign in with your email and password.</span>
         <form className='sign-up-form' onSubmit={this.handleSubmit}>
           <FormInput
             type='text'
@@ -93,7 +85,7 @@ class SignUp extends React.Component {
             label='Confirm Password'
             required
           />
-          <CustomButton type='submit'>SIGN UP</CustomButton>
+          <CustomButton type='submit'>Sign Up</CustomButton>
         </form>
       </SignUpContainer>
     );
