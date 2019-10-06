@@ -21,11 +21,3 @@
 - Checkout Page:
 
 ![](./screenshots/checkout.png)
-
-## #Mobile Responsive
-
-- Home Page:
-![](./screenshots/mobile-shop.png)
-
-- Shop Category:
-![](./screenshots/mobile-category.png)
